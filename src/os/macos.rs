@@ -63,6 +63,7 @@ impl From<ActivationPolicy> for NSApplicationActivationPolicy {
 /// Additional methods on `WindowBuilder` that are specific to MacOS.
 pub trait WindowBuilderExt {
     fn with_activation_policy(self, activation_policy: ActivationPolicy) -> WindowBuilder;
+    fn with_full_size_content(self, full_size_content: bool) -> WindowBuilder;
 }
 
 impl WindowBuilderExt for WindowBuilder {
@@ -70,6 +71,13 @@ impl WindowBuilderExt for WindowBuilder {
     #[inline]
     fn with_activation_policy(mut self, activation_policy: ActivationPolicy) -> WindowBuilder {
         self.platform_specific.activation_policy = activation_policy;
+        self
+    }
+    
+    /// Sets whether we want full size content
+    #[inline]
+    fn with_full_size_content(mut self, full_size_content: bool) -> WindowBuilder {
+        self.platform_specific.full_size_content = full_size_content;
         self
     }
 }
